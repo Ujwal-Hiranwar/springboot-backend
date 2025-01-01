@@ -35,7 +35,7 @@ private UserDao userdao;
     @CrossOrigin(origins = "https://foryouclipboardapp.vercel.app")
     @GetMapping("/recive/{id}")
 public String SendDataToFrontend(@PathVariable("id") String id){
-    return userdao.getTextById(id);
+    return "This is from backend";
 }
 }
 
