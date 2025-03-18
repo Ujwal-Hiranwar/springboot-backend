@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Map;
 
 @RestController
@@ -16,9 +17,11 @@ public class EncrypterdContentController {
     @PostMapping("/save")
     public ResponseEntity<String> sendEncryptedContent(@RequestBody Map<String, String> request) {
         try {
+            System.out.println("request recived in backend");
             String content = request.get("content");
             String otp = request.get("otp");
-            LocalDateTime expiryTime = LocalDateTime.parse(request.get("expiryTime"));
+            OffsetDateTime offsetDateTime = OffsetDateTime.parse(request.get("expiryTime"));
+            LocalDateTime expiryTime = offsetDateTime.toLocalDateTime();
 
             clipboardService.saveClipboardData(content, otp, expiryTime);
             return ResponseEntity.ok("Data encrypted and saved successfully!");
@@ -30,7 +33,9 @@ public class EncrypterdContentController {
     @CrossOrigin("${app.cors.allowed-origin}")
     @GetMapping("/retrieve/{otp}")
     public ResponseEntity<String> retrieveDecryptedContent(@PathVariable String otp) {
+
         try {
+
             return ResponseEntity.ok(clipboardService.retrieveDecryptedContent(otp));
         } catch (Exception e) {
 

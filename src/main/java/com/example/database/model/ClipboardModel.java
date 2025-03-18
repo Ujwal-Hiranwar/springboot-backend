@@ -26,7 +26,7 @@ public class ClipboardModel {
     @Column(name = "encrypted_content", nullable = false, columnDefinition = "TEXT")
     private String encryptedContent;
 
-    @Column(name = "encryption_key", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "encryption_key", nullable = true, columnDefinition = "TEXT")
     private String encryptionKey;
 
     @Column(name = "otp", unique = true, length = 4)
