@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    container_name: clipboard-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: AVNS_2CM5jHu3h_KCFcj5WKg
+      MYSQL_DATABASE: defaultdb
+      MYSQL_USER: avnadmin
+      MYSQL_PASSWORD: AVNS_2CM5jHu3h_KCFcj5WKg
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  clipboard-app:
+    build: .
+    container_name: clipboard-app
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://avnadmin:AVNS_2CM5jHu3h_KCFcj5WKg@mysql-32b06847-rdbms-project.i.aivencloud.com:21493/defaultdb?ssl-mode=REQUIRED
+      SPRING_DATASOURCE_USERNAME: avnadmin
+      SPRING_DATASOURCE_PASSWORD: AVNS_2CM5jHu3h_KCFcj5WKg
+    ports:
+      - "9090:9090"
+
+volumes:
+  mysql-data:

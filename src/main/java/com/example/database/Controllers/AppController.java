@@ -15,7 +15,7 @@ public class AppController {
     public AppController(ClipboardService service) {
         this.service = service;
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "${app.cors.allowed-origin}")
     @PostMapping("/post/text")
     public ResponseEntity<ClipboardModel> saveClipboardData(@RequestBody ClipboardModel data) {
         ClipboardModel savedData = service.saveClipboardData(data);
@@ -23,7 +23,7 @@ public class AppController {
         return ResponseEntity.ok(savedData);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "${app.cors.allowed-origin}")
     @GetMapping("/get/text/{otp}")
     public ResponseEntity<ClipboardModel> getByOtp(@PathVariable String otp) {
         Optional<ClipboardModel> data = service.getByOtp(otp);
