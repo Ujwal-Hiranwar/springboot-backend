@@ -35,7 +35,12 @@ public class ClipboardEncryptionService {
         return clipboardOptional
                 .map(clipboard -> {
                     try {
-                        return AESUtil.decrypt(clipboard.getEncryptedContent(), clipboard.getEncryptionKey());
+                        if(clipboard.getEncryptionKey() == null){
+                            return clipboard.getEncryptedContent();
+                        }else{
+                            return AESUtil.decrypt(clipboard.getEncryptedContent(), clipboard.getEncryptionKey());
+                        }
+
                     } catch (Exception e) {
                         throw new RuntimeException("Decryption failed", e);
                     }

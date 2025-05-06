@@ -18,7 +18,7 @@ public class AESUtil {
         return Base64.getEncoder().encodeToString(secretKey.getEncoded());
     }
 
-    // Encrypt content using AES
+   
     public static String encrypt(String content, String secretKey) throws Exception {
         SecretKeySpec keySpec = new SecretKeySpec(Base64.getDecoder().decode(secretKey), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);

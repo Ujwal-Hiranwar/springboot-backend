@@ -17,7 +17,6 @@ public class EncrypterdContentController {
     @PostMapping("/save")
     public ResponseEntity<String> sendEncryptedContent(@RequestBody Map<String, String> request) {
         try {
-            System.out.println("request recived in backend");
             String content = request.get("content");
             String otp = request.get("otp");
             OffsetDateTime offsetDateTime = OffsetDateTime.parse(request.get("expiryTime"));
