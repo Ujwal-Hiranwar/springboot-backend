@@ -23,7 +23,7 @@ public class EncrypterdContentController {
             LocalDateTime expiryTime = offsetDateTime.toLocalDateTime();
 
             clipboardService.saveClipboardData(content, otp, expiryTime);
-            return ResponseEntity.ok("Data encrypted and saved successfully!");
+            return ResponseEntity.ok("Dat encrypted and saved successfully!");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error: " + e.getMessage());
         }
